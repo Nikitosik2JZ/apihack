@@ -1,0 +1,654 @@
+:root{
+  --bg: #0b0c10;
+  --card: #121317;
+  --text: #e6e7ea;
+  --muted: #a6abba;
+  --brand: #6ea8fe;
+  --brand-2: #8b5cf6;
+  --ok: #22c55e;
+  --warn: #f59e0b;
+  --bad: #ef4444;
+  --border: #23252c;
+  --ring: rgba(110,168,254,.35);
+  --shadow: 0 1px 2px rgba(0,0,0,.2), 0 8px 24px rgba(0,0,0,.25);
+  --radius: 12px;
+  --gap-1: .25rem;
+  --gap-2: .5rem;
+  --gap-3: .75rem;
+  --gap-4: 1rem;
+  --gap-6: 1.5rem;
+  --gap-8: 2rem;
+  --maxw: 1200px;
+  --grid-min: 260px;
+  --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+@media (prefers-color-scheme: light){
+  :root[data-theme="auto"]{
+    --bg: #f7f8fb;
+    --card: #ffffff;
+    --text: #0d0f14;
+    --muted: #5b6373;
+    --brand: #356ae6;
+    --brand-2: #6d28d9;
+    --border: #e6e8ef;
+    --ring: rgba(53,106,230,.25);
+    --shadow: 0 1px 2px rgba(20,30,60,.05), 0 10px 30px rgba(20,30,60,.08);
+  }
+}
+:root[data-theme="light"]{ color-scheme: light; }
+:root[data-theme="dark"]{ color-scheme: dark; }
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font);
+  background:linear-gradient(180deg, var(--bg), #0b0c10 60%);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--gap-4)}
+.page{padding:var(--gap-8) 0}
+.page-title{margin:0 0 var(--gap-6);font-size:clamp(22px,3vw,28px);font-weight:700;letter-spacing:.2px}
+
+.skip{
+  position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+}
+.skip:focus{
+  left:var(--gap-4);top:var(--gap-4);width:auto;height:auto;padding:var(--gap-2) var(--gap-3);
+  background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow);
+}
+
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(10,11,15,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+:root[data-theme="auto"] .site-header{
+  background:color-mix(in oklab, var(--card) 60%, transparent);
+}
+.site-header .container{
+  display:flex;align-items:center;gap:var(--gap-4);
+  padding:var(--gap-3) var(--gap-4);
+}
+.brand{display:flex;align-items:center;gap:var(--gap-3);min-width:0}
+.logo{
+  width:28px;height:28px;border-radius:8px;
+  background:linear-gradient(135deg, var(--brand), var(--brand-2));
+  display:grid;place-items:center;color:white;font-size:14px;font-weight:700;box-shadow:var(--shadow);
+}
+.brand-name{font-weight:700;letter-spacing:.3px}
+.nav{
+  flex: 1 1 auto;
+  display:flex;
+  justify-content:center;
+  gap: var(--gap-3);
+}
+.nav-link{
+  padding:.5rem .75rem;border-radius:8px;border:1px solid transparent;
+}
+.nav-link:hover{background:color-mix(in oklab, var(--brand) 12%, transparent)}
+.header-actions{
+  margin-left:auto; 
+  flex: 0 0 auto;
+  display:flex;
+  align-items:center;
+  gap: var(--gap-3);
+}
+.header-actions{display:flex;gap:var(--gap-3);align-items:center}
+
+.btn{
+  padding:.6rem .9rem;border-radius:10px;border:1px solid var(--border);
+  background:linear-gradient(180deg, color-mix(in oklab, var(--card) 85%, #000 15%), var(--card));
+  color:var(--text);box-shadow:var(--shadow);cursor:pointer;transition:.2s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:focus{outline:2px solid var(--ring);outline-offset:2px}
+.btn.primary{
+  background:linear-gradient(135deg, var(--brand), var(--brand-2));
+  border-color:transparent;color:white;
+}
+.btn.ghost{
+  background:transparent;border-color:var(--border);
+}
+
+.site-footer{
+  border-top:1px solid var(--border);margin-top:var(--gap-8);
+  background:rgba(10,11,15,.5);
+}
+.site-footer .container{
+  display:flex;gap:var(--gap-3);justify-content:space-between;align-items:center;
+  padding:var(--gap-4);
+}
+.footer-right{color:var(--muted);font-size:.95rem}
+
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--grid-min),1fr));
+  gap:var(--gap-4);
+}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
+}
+.card-head{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--gap-3);
+  padding:var(--gap-4) var(--gap-4) var(--gap-3) var(--gap-4);
+  border-bottom:1px solid var(--border);
+}
+.card-title{margin:0;font-size:1.05rem}
+.card-foot{
+  display:flex;gap:var(--gap-3);align-items:center;
+  padding:var(--gap-3) var(--gap-4);border-top:1px solid var(--border);
+}
+.table-wrap{overflow:auto}
+.table{
+  width:100%;border-collapse:separate;border-spacing:0;margin:0;
+}
+.table th,.table td{
+  text-align:left;padding:.75rem .9rem;border-bottom:1px solid var(--border);
+}
+.table thead th{
+  color:var(--muted);font-weight:600;background:color-mix(in oklab, var(--card) 88%, transparent);
+  position:sticky;top:0;z-index:1;
+}
+.table tbody tr:hover{
+  background:color-mix(in oklab, var(--brand) 8%, transparent);
+}
+
+.muted{color:var(--muted)}
+.badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.25rem .6rem;border-radius:999px;font-weight:600;
+  background:color-mix(in oklab, var(--brand) 16%, transparent);
+  border:1px solid color-mix(in oklab, var(--brand) 40%, var(--border));
+}
+.badge.info{
+  background:color-mix(in oklab, var(--brand-2) 16%, transparent);
+  border-color:color-mix(in oklab, var(--brand-2) 40%, var(--border));
+}
+.badge.ok{
+  background:color-mix(in oklab, var(--ok) 20%, transparent);
+  border-color:color-mix(in oklab, var(--ok) 45%, var(--border));
+}
+
+.list{list-style:none;margin:0;padding:var(--gap-3) var(--gap-4);display:flex;flex-direction:column;gap:.5rem}
+.list li{display:flex;align-items:center;justify-content:space-between;padding:.4rem .25rem;border-bottom:1px dashed var(--border)}
+.dot{
+  width:10px;height:10px;border-radius:999px;display:inline-block;background:var(--muted);
+  box-shadow:0 0 0 3px color-mix(in oklab, currentColor 25%, transparent);
+}
+.dot.ok{background:var(--ok);color:var(--ok)}
+.dot.warn{background:var(--warn);color:var(--warn)}
+.dot.bad{background:var(--bad);color:var(--bad)}
+
+.stack{display:flex;flex-direction:column;gap:.75rem;padding:var(--gap-4)}
+.note{border:1px solid var(--border);border-radius:10px;padding:.75rem .9rem;background:linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, #000 10%), var(--card))}
+.note-head{display:flex;align-items:center;gap:.5rem;font-weight:600}
+.note-body{color:var(--muted);margin-top:.25rem}
+
+@media (max-width: 720px){
+  .nav{display:none}
+  .header-actions{margin-left:auto}
+  .site-footer .container{flex-direction:column;align-items:flex-start;gap:.5rem}
+}
+
+.nav-link.selected{
+  background: color-mix(in oklab, var(--brand) 22%, transparent);
+  border-color: color-mix(in oklab, var(--brand) 50%, var(--border));
+  color: white;
+}
+.header-actions form{margin:0; display:inline}
+.logout-btn{
+  /* опционально: сделать «Выйти» менее акцентной чем primary */
+  background:transparent;
+  border-color:var(--border);
+}
+.header-actions form .logout-btn:hover{
+  background:color-mix(in oklab, var(--bad) 15%, transparent);
+  border-color:color-mix(in oklab, var(--bad) 40%, var(--border));
+  color:white;
+}
+.details{padding: var(--gap-4)}
+.details-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: var(--gap-4);
+}
+.details-item{
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding: .9rem;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--card) 92%, #000 8%), var(--card));
+}
+.details-label{
+  color: var(--muted);
+  font-size: .9rem;
+  margin-bottom: .35rem;
+}
+.details-value{
+  font-weight: 600;
+  word-break: break-word;
+}
+.details-full{grid-column: 1 / -1}
+
+@media (max-width: 800px){
+  .details-grid{grid-template-columns: 1fr}
+}
+
+/* Контейнер раздела редактирования */
+.edit-section{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--gap-4);
+}
+
+/* Заголовок и описание */
+.edit-section h1,
+.edit-section .section-title{
+  margin: 0 0 var(--gap-3);
+  font-size: clamp(20px, 2.6vw, 26px);
+  font-weight: 700;
+}
+.edit-section p{
+  margin: 0 0 var(--gap-4);
+  color: var(--muted);
+}
+
+/* Форма редактирования аккаунта */
+.account-edit{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: var(--gap-4);
+  margin-top: var(--gap-2);
+}
+.account-edit .field{
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+.account-edit .field-full{
+  grid-column: 1 / -1;
+}
+.account-edit label{
+  font-weight: 600;
+    font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0;  
+}
+.account-edit input,
+.account-edit textarea,
+.account-edit select{
+  display: block;
+  appearance: none;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, #000 10%), var(--card));
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: .65rem .8rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.account-edit input:focus,
+.account-edit textarea:focus,
+.account-edit select:focus{
+  border-color: color-mix(in oklab, var(--brand) 55%, var(--border));
+  box-shadow: 0 0 0 3px var(--ring);
+}
+.account-edit .hint{
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+/* Кнопки действий */
+.account-edit-actions{
+  display: flex;
+  gap: var(--gap-3);
+  align-items: center;
+  justify-content: flex-end;
+  grid-column: 1 / -1;
+  margin-top: .25rem;
+}
+
+/* Адаптив */
+@media (max-width: 800px){
+  .account-edit{grid-template-columns: 1fr}
+}
+
+
+
+/* Форма — класс только на теге form */
+.login-form{
+  display: grid;
+  row-gap: var(--gap-6);
+}
+.login-form label{
+  display:block; font-weight:600; margin-bottom:.5rem;
+}
+.login-form input[type="text"],
+.login-form input[type="email"],
+.login-form input[type="password"]{
+  width: 100%;
+  max-width: 360px;
+  appearance: none;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, #000 10%), var(--card));
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: .7rem .85rem;
+  color: var(--text);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+/* Блок под формой — три элемента в столбик с воздухом */
+/* Контейнер под формой */
+.login-under{
+  display: grid;
+  gap: var(--gap-3);
+  margin-top: var(--gap-6);
+  max-width: 360px;                  /* совпадает с шириной полей формы */
+}
+
+/* Элементы списка */
+
+
+/* Кнопки в элементах */
+.login-under .btn.thin{
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: .5rem .75rem;
+  border-radius: 8px;
+  transition: border-color .2s ease, background .2s ease;
+}
+.login-under .btn.thin:hover{
+  border-color: color-mix(in oklab, var(--brand) 45%, var(--border));
+  background: color-mix(in oklab, var(--brand) 10%, transparent);
+}
+
+/* Мобильная адаптация: элементы тянутся на всю ширину */
+@media (max-width: 420px){
+  .login-under{
+    max-width: 100%;
+  }
+
+}
+
+/* === БАНКОВСКИЕ СТРАНИЦЫ === */
+
+/* Сетка карточек банков */
+.bank-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--gap-4);
+  margin-bottom: var(--gap-6);
+}
+
+/* Карточка одного банка */
+.bank-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--gap-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-3);
+}
+
+.bank-card-title{
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.bank-details{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.bank-detail-row, .info-row, .summary-row{
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap-3);
+  padding: .4rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.bank-detail-row .label, .info-row .label, .summary-row .label{
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.bank-detail-row .value, .info-row .value, .summary-row .value{
+  text-align: right;
+  word-break: break-word;
+}
+
+.bank-card-actions{
+  display: flex;
+  gap: var(--gap-3);
+  margin-top: auto;
+}
+
+/* Пустое состояние */
+.empty-state{
+  background: var(--card);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: var(--gap-6) var(--gap-4);
+  text-align: center;
+  color: var(--muted);
+}
+
+.empty-text{
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* Действия страницы */
+.page-actions{
+  display: flex;
+  gap: var(--gap-3);
+  justify-content: flex-end;
+  margin-top: var(--gap-6);
+}
+
+/* === ФОРМА БАНКА === */
+
+.bank-info-box{
+  background: color-mix(in oklab, var(--brand) 8%, var(--card));
+  border: 1px solid color-mix(in oklab, var(--brand) 35%, var(--border));
+  border-radius: var(--radius);
+  padding: var(--gap-4);
+  margin-bottom: var(--gap-6);
+}
+
+.info-footer{
+  margin: var(--gap-3) 0 0;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.bank-form{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--gap-4);
+}
+
+.bank-form p{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: var(--gap-4);
+}
+
+.bank-form label{
+  display: block;
+  font-weight: 600;
+  margin-bottom: .5rem;
+}
+.bank-form select{
+  width: 100%;
+  appearance: none; /* убираем дефолтную стрелку */
+  background: linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, #000 10%), var(--card));
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: .7rem 2.5rem .7rem .85rem; /* место справа под кастомную стрелку */
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+  
+  /* Кастомная стрелка через SVG */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23a6abba' d='M4 6l4 4 4-4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .75rem center;
+  background-size: 16px;
+}
+
+.bank-form input, .bank-form select, .bank-form textarea{
+  width: 100%;
+  appearance: none;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--card) 90%, #000 10%), var(--card));
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: .7rem .85rem;
+  color: var(--text);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.bank-form input:focus, .bank-form select:focus, .bank-form textarea:focus{
+  border-color: color-mix(in oklab, var(--brand) 55%, var(--border));
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.form-actions{
+  display: flex;
+  gap: var(--gap-3);
+  justify-content: flex-end;
+  margin-top: var(--gap-4);
+}
+
+/* === ПОДТВЕРЖДЕНИЕ УДАЛЕНИЯ === */
+
+.delete-warning{
+  background: color-mix(in oklab, var(--bad) 8%, var(--card));
+  border: 1px solid color-mix(in oklab, var(--bad) 35%, var(--border));
+  border-radius: var(--radius);
+  padding: var(--gap-4);
+  margin-bottom: var(--gap-6);
+}
+
+.warning-title{
+  margin: 0 0 var(--gap-3);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--bad);
+}
+
+.bank-summary{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: var(--gap-3);
+}
+
+.warning-text{
+  margin: var(--gap-3) 0 0;
+  color: var(--muted);
+}
+
+.delete-form{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--gap-4);
+}
+
+.btn.danger{
+  background: linear-gradient(135deg, var(--bad), color-mix(in oklab, var(--bad) 85%, #000 15%));
+  border: none;
+  color: #fff;
+}
+
+.btn.danger:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px color-mix(in oklab, var(--bad) 35%, transparent);
+}
+
+/* Карточка статусов банков */
+.bank-status-card{
+  background: linear-gradient(135deg, color-mix(in oklab, var(--brand) 12%, var(--card)), var(--card));
+  border: 1px solid color-mix(in oklab, var(--brand) 35%, var(--border));
+}
+
+/* Сетка на три банка */
+.bank-status-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-4);
+  padding: var(--gap-4);
+}
+
+/* Один банк */
+.bank-status-item{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: var(--gap-3);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.bank-name{
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.bank-status{
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+/* Цветные индикаторы статуса */
+.status-indicator{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-active{
+  background: #22c55e;
+  box-shadow: 0 0 0 3px color-mix(in oklab, #22c55e 20%, transparent);
+}
+
+.status-pending{
+  background: #eab308;
+  box-shadow: 0 0 0 3px color-mix(in oklab, #eab308 20%, transparent);
+}
+
+.status-none{
+  background: #ef4444;
+  box-shadow: 0 0 0 3px color-mix(in oklab, #ef4444 20%, transparent);
+}
+
+/* Адаптив: на мобильных одна колонка */
+@media (max-width: 768px){
+  .bank-status-grid{
+    grid-template-columns: 1fr;
+  }
+}
