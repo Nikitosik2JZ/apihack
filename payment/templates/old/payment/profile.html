@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Profile - {{ request.user.username }}{% endblock %}
+
+{% block content %}
+  <h1>Профиль пользователя</h1>
+
+  <div class="profile-card">
+    <!-- Аватар -->
+    {% if user_profile.avatar %}
+      <img src="{{ user_profile.avatar.url }}" alt="Аватар" class="avatar">
+    {% else %}
+      <div class="avatar-placeholder">Нет аватара</div>
+    {% endif %}
+
+    <!-- Основная информация -->
+    <dl class="profile-info">
+      <dt>Имя:</dt>
+      <dd>{{ request.user.first_name }}</dd>
+
+      <dt>Фамилия:</dt>
+      <dd>{{ request.user.last_name }}</dd>
+
+      <dt>Username:</dt>
+      <dd>{{ request.user.username }}</dd>
+
+      <dt>Email:</dt>
+      <dd>{{ request.user.email }}</dd>
+
+      <dt>Дата рождения:</dt>
+      <dd>{% if user_profile.date_of_birth %}{{ user_profile.date_of_birth|date:"d F Y" }}{% else %}Не указано{% endif %}</dd>
+
+      <dt>Телефон:</dt>
+      <dd>{% if user_profile.phone_number %}{{ user_profile.phone_number }}{% else %}Не указан{% endif %}</dd>
+
+      <dt>Биография:</dt>
+      <dd>{{ user_profile.bio|default:"Пусто" }}</dd>
+    </dl>
+
+    <!-- Кнопки -->
+    <div class="profile-actions">
+      <a href="{% url 'edit' %}" class="btn">Редактировать профиль</a>
+      <a href="{% url 'password_change' %}" class="btn">Сменить пароль</a>
+      <a href="{% url 'logout' %}" class="btn">Выйти</a>
+    </div>
+  </div>
+{% endblock %}

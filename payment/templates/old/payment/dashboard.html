@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+  <div class="dashboard-container">
+    <!-- Приветствие -->
+    <div class="greeting">
+      <h2>Привет, {{ request.user.username }}!</h2>
+      <p>Добро пожаловать в ваш личный кабинет.</p>
+    </div>
+
+    <!-- Курсы валют -->
+    <div class="currency-rates">
+      <h3>Курсы валют ({{ today|date:"d.m.Y" }})</h3>
+      <table>
+        <tr><th>USD</th><td>1 USD = {{price_now.USD }} RUB</td></tr>
+        <tr><th>EUR</th><td>1 EUR = {{price_now.EUR}} RUB</td></tr>
+        <tr><th>GBP</th><td>1 GBP = {{price_now.GBP}} RUB </td></tr>
+      </table>
+    </div>
+
+    <!-- Курс золота -->
+   <div class="crypto-rates">
+      <h3>Курсы криптовалют</h3>
+      <table>
+        <tr><th>BTC</th><td>1 BTC = МИЛЛИАРД БРАТ RUB</td></tr>
+        <tr><th>ETH</th><td>1 ETH = НЕ КАТИТ RUB</td></tr>
+        <tr><th>BNB</th><td>1 BNB = <b>ЭТО ВООБЩЕ ЧЁ</b> RUB</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Дополнительные действия -->
+
+{% endblock %}
